@@ -12,7 +12,7 @@ const io = socketio(server);
 io.on('connection', (sock) => {
   sock.emit('message', 'You are connected');
 
-  sock.on('message', (text) => io.emit('message', console.log(text)))
+  sock.on('mouse click', (arg1, arg2) => io.emit('mouse click', arg1, arg2))
 })
 
 server.on('error', (err) => {

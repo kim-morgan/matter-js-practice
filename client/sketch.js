@@ -20,13 +20,17 @@ function setup() {
   let options = {
     isStatic: true
   }
-
-  const sock = io();
-  sock.on('message', () => console.log("message"))
   
  
   ground = new Floor(200, height, width, 10, options);
   World.add(world, ground);
+  
+  let boxOptions = {
+    label: "box"
+  }
+
+  const sock = io();
+  sock.on('mouse click', (arg1, arg2) => boxes.push(new Box(arg1, arg2, 50, 50, boxOptions)))
 
   // Matter.Events.on(engine, "collisionStart", 
   // (event) => {console.log(event.pairs[0].bodyA);
@@ -34,16 +38,13 @@ function setup() {
   //   World.remove(world, event.pairs[0].bodyB)
   // boxes.pop();}
   // );
-
 }
 
 function mousePressed() {
-  let options = {
-    label: "box"
-  }
-  boxes.push(new Box(mouseX, mouseY, 50, 50, options));
+  let x = mouseX;
+  let y = mouseY;
   const sock = io();
-  sock.emit('message', 'mouse clicked')  
+  sock.emit('mouse click', x, y)
 }
 
 function draw() {
