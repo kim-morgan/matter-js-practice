@@ -10,6 +10,8 @@ let ground;
 
 let hp = 1;
 
+
+
 function setup() {
   createCanvas(400, 400);
   engine = Engine.create();
@@ -20,6 +22,8 @@ function setup() {
   }
 
   const sock = io();
+  sock.on('message', () => console.log("message"))
+  
  
   ground = new Floor(200, height, width, 10, options);
   World.add(world, ground);
@@ -38,6 +42,8 @@ function mousePressed() {
     label: "box"
   }
   boxes.push(new Box(mouseX, mouseY, 50, 50, options));
+  const sock = io();
+  sock.emit('message', 'mouse clicked')  
 }
 
 function draw() {
