@@ -18,16 +18,18 @@ function setup() {
   let options = {
     isStatic: true
   }
+
+  const sock = io();
  
   ground = new Floor(200, height, width, 10, options);
   World.add(world, ground);
 
-  Matter.Events.on(engine, "collisionStart", 
-  (event) => {console.log(event.pairs[0].bodyA);
-    console.log(event.pairs[0].bodyB);
-    World.remove(world, event.pairs[0].bodyB)
-  boxes.pop();}
-  );
+  // Matter.Events.on(engine, "collisionStart", 
+  // (event) => {console.log(event.pairs[0].bodyA);
+  //   console.log(event.pairs[0].bodyB);
+  //   World.remove(world, event.pairs[0].bodyB)
+  // boxes.pop();}
+  // );
 
 }
 
